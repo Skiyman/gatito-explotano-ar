@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class ShootScript : MonoBehaviour
 {
-    public GameObject arCamera;
-    public GameObject smoke;
+    public GameObject bulletPrefab;  // Префаб пули
+    public float bulletSpeed = 20f;  // Скорость пули
 
     public void Shoot()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit))
-        {
-            if(hit.transform.name == "cat(Clone)" || hit.transform.name == "cat2(Clone)" || hit.transform.name == "cat3(Clone)")
-            {
-                Destroy(hit.transform.gameObject);
+        // Берём актуальную камеру
+        Camera mainCamera = Camera.main;
 
-                Instantiate(smoke, hit.point, Quaternion.LookRotation(hit.normal));
+        if (mainCamera != null)
+        {
+            // Создаём пулю в текущей позиции камеры с её направлением
+            GameObject bulletInstance = Instantiate(bulletPrefab, mainCamera.transform.position, mainCamera.transform.rotation);
+
+            // Получаем Rigidbody и придаём начальную скорость в направлении камеры
+            Rigidbody rb = bulletInstance.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = mainCamera.transform.forward * bulletSpeed;
             }
+
+            // Уничтожаем пулю через 10 секунд
+            Destroy(bulletInstance, 10f);
+        }
+        else
+        {
+            Debug.LogError("Главная камера не найдена!");
         }
     }
 }
