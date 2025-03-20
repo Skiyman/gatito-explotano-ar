@@ -25,7 +25,7 @@ public class ShootScript : MonoBehaviour
             }
 
             // Уничтожаем пулю через 10 секунд
-            Destroy(bulletInstance, 10f);
+            Destroy(bulletInstance, 5f);
         }
         else
         {
