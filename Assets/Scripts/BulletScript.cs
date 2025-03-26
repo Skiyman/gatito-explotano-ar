@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    public float damage = 1f;
+    private Vector3 velocity;
+
+    public void SetVelocity(Vector3 newVelocity) {
+        velocity = newVelocity;
+    }
+
     void Start()
     {
         if (GetComponent<Rigidbody>() == null)
@@ -16,6 +23,6 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * 7.5f);
+        transform.Translate(velocity * Time.deltaTime * 7.5f);
     }
 }
