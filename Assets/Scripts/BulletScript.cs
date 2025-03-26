@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Drawing;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public float damage = 1f;
-    private Vector3 velocity;
+    protected Vector3 delta = Vector3.forward;
+    private float timer = 0f;
+    public float lifetime = 3f;
+    public float damage = 10f;
 
-    public void SetVelocity(Vector3 newVelocity) {
-        velocity = newVelocity;
-    }
-
-    void Start()
+    public void Start()
     {
         if (GetComponent<Rigidbody>() == null)
         {
@@ -23,6 +19,20 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(velocity * Time.deltaTime * 7.5f);
+        timer += Time.deltaTime;
+
+        float progress = timer / lifetime;
+
+        transform.Translate(new Vector3(
+            delta.x * progress,
+            delta.y * progress,
+            delta.z
+        ));
+
+        if (timer >= lifetime)
+        {
+            // ураа суицид
+            Destroy(gameObject);
+        }
     }
 }

@@ -8,9 +8,13 @@ public class GiftScript : MonoBehaviour
 
     void OnTriggerEnter(Collider bullet)
     {
-        Instantiate(metalPipe, new Vector3(0f, 4f, 5f), Quaternion.Euler(0, 90, 0));
+        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+        if (bullet != null)
+        {
+            Instantiate(metalPipe, new Vector3(0f, 4f, 5f), Quaternion.Euler(0, 90, 0));
 
-        Destroy(this.gameObject);
-        Destroy(bullet.gameObject);
+            Destroy(this.gameObject);
+            Destroy(bullet.gameObject);
+        }
     }
 }
