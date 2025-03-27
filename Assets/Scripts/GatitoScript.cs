@@ -1,15 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Xml.Linq;
 using UnityEngine;
 
 public class GatitoScript : MonoBehaviour
 {
-    public GameObject explode;
-    public float maxHealth = 100f;
-    private float currentHealth;
+    [Header("Effects")]
+    [SerializeField] private GameObject explode;
 
-    void Start () {
-        currentHealth = maxHealth;
+    protected float _maxHealth = 100f;
+    protected float _currentHealth;
+    public bool IsAlive => _currentHealth > 0;
+
+    protected virtual void Start()
+    {
+        _currentHealth = _maxHealth;
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+
+
+        if (!IsAlive) return;
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     void Update()
@@ -19,31 +35,23 @@ public class GatitoScript : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, cameraPos, 0.5f * Time.deltaTime);
     }
 
-    void Die() {
-        BoxCollider gatito = gameObject.GetComponent<BoxCollider>();
-        Vector3 hitPoint = gatito.ClosestPoint(transform.position);
-        Vector3 hitNormal = gatito.transform.forward;
-
-        GameObject explodeInstance = Instantiate(explode, hitPoint, Quaternion.LookRotation(hitNormal));
-
-        Destroy(explodeInstance, 0.8f);
-        Destroy(gatito.gameObject);
-    }
-
-    public void TakeDamage(float damage) {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0) {
-            Die();
-        }
-    }
-
-    void OnTriggerEnter(Collider bullet)
+    protected virtual void Die()
     {
-        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-        if (bullet != null) {
-            TakeDamage(bulletScript.damage);
+        if (explode != null)
+        {
+            Vector3 hitPoint = GetComponent<Collider>().ClosestPoint(transform.position);
+            Instantiate(explode, hitPoint, Quaternion.identity);
         }
-        Destroy(bullet.gameObject);
+
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<BulletScript>(out var bullet))
+        {
+            TakeDamage(bullet.damage);
+            Destroy(other.gameObject);
+        }
     }
 }

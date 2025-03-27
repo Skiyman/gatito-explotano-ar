@@ -212,6 +212,8 @@ GameObject:
   - component: {fileID: 65284397}
   - component: {fileID: 65284396}
   - component: {fileID: 65284395}
+  - component: {fileID: 65284400}
+  - component: {fileID: 65284401}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -426,6 +428,56 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &65284400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65284393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1b3b6a662dde84388320a3f24a6413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicCatPrefab: {fileID: 5632414937038717425, guid: 5851540d113abfe47b3991dbc33cf2b5,
+    type: 3}
+  armoredCatPrefab: {fileID: 4781784540559623105, guid: ba36d29dea92fbd49a8c0b902df90a8d,
+    type: 3}
+  regenCatPrefab: {fileID: 6219573840960164020, guid: 2a8f20cdb15752f4899d0b7a473a253d,
+    type: 3}
+  giftPrefab: {fileID: 5632414937038717425, guid: 53d0f744b32ab974a9a3cecf08b59d3e,
+    type: 3}
+  metalPipePrefab: {fileID: 2598030745841230942, guid: c3f5a9bbd61a5204d8acd989cabc5f7f,
+    type: 3}
+  armoredCatChance: 0.3
+  regenCatChance: 0.2
+  spawnInterval: 2
+--- !u!114 &65284401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65284393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1b3b6a662dde84388320a3f24a6413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicCatPrefab: {fileID: 5632414937038717425, guid: 5851540d113abfe47b3991dbc33cf2b5,
+    type: 3}
+  armoredCatPrefab: {fileID: 4781784540559623105, guid: ba36d29dea92fbd49a8c0b902df90a8d,
+    type: 3}
+  regenCatPrefab: {fileID: 6219573840960164020, guid: 2a8f20cdb15752f4899d0b7a473a253d,
+    type: 3}
+  giftPrefab: {fileID: 5632414937038717425, guid: 53d0f744b32ab974a9a3cecf08b59d3e,
+    type: 3}
+  metalPipePrefab: {fileID: 2598030745841230942, guid: c3f5a9bbd61a5204d8acd989cabc5f7f,
+    type: 3}
+  armoredCatChance: 0.3
+  regenCatChance: 0.2
+  spawnInterval: 2
 --- !u!1 &205428659
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,15 +507,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1b3b6a662dde84388320a3f24a6413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  cats:
-  - {fileID: 5632414937038717425, guid: 5851540d113abfe47b3991dbc33cf2b5, type: 3}
-  gift: {fileID: 5632414937038717425, guid: 53d0f744b32ab974a9a3cecf08b59d3e, type: 3}
-  metalPipe: {fileID: 2598030745841230942, guid: c3f5a9bbd61a5204d8acd989cabc5f7f,
+  basicCatPrefab: {fileID: 5632414937038717425, guid: 5851540d113abfe47b3991dbc33cf2b5,
     type: 3}
+  armoredCatPrefab: {fileID: 4781784540559623105, guid: ba36d29dea92fbd49a8c0b902df90a8d,
+    type: 3}
+  regenCatPrefab: {fileID: 6219573840960164020, guid: 2a8f20cdb15752f4899d0b7a473a253d,
+    type: 3}
+  giftPrefab: {fileID: 176482, guid: fe1bac696975c4932b5f99db90ec1396, type: 3}
+  metalPipePrefab: {fileID: 2598030745841230942, guid: c3f5a9bbd61a5204d8acd989cabc5f7f,
+    type: 3}
+  armoredCatChance: 0.3
+  regenCatChance: 0.2
+  spawnInterval: 2
 --- !u!4 &205428661
 Transform:
   m_ObjectHideFlags: 0
@@ -1274,8 +1329,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 782628377}
-  - {fileID: 205428661}
   - {fileID: 366675099}
   - {fileID: 843470016}
   - {fileID: 223974228}
   - {fileID: 1114040583}
+  - {fileID: 205428661}
